@@ -84,22 +84,6 @@ namespace Scaffolds
 
         }
       }
-
-      [HarmonyPatch]
-      public static class BuildingDef_IsValidPlaceLocation_Patch
-      {
-        private static MethodBase TargetMethod() => AccessTools.Method(typeof(BuildingDef), nameof(BuildingDef.IsValidPlaceLocation), new Type[] { typeof(GameObject), typeof(int), typeof(Orientation), typeof(bool), typeof(string).MakeByRefType() });
-        public static bool Postfix(bool __result, GameObject source_go, int cell, ref string fail_reason)
-        {
-          if (source_go.GetComponent<Building>().Def.name == "Scaffold" && Grid.Solid[cell])
-          {
-            fail_reason = (string)UI.TOOLTIPS.HELP_BUILDLOCATION_OCCUPIED;
-            return false;
-          }
-
-          return __result;
-        }
-      }
     }
   }
 

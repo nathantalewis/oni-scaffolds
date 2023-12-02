@@ -16,7 +16,7 @@ namespace Scaffolds
     public const string SelfDestructButtonTooltip = "When enabled, automatically remove scaffold after some time has passed";
     public const string SelfDestructButtonCancelText = "Make Permanent";
     public const string SelfDestructButtonCancelTooltip = "When enabled, this scaffold will remain until manually deconstructed";
-    public const float TimeToLive = 10f;
+    public const float TimeToLive = 10 * 600f;
 
     public const ObjectLayer objectLayer = ObjectLayer.FillPlacer; // This layer doesn't seem to be used anywhere else... hopefully
 
