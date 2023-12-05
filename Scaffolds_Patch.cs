@@ -19,8 +19,8 @@ namespace Scaffolds
       {
         public static void Prefix()
         {
-
-          Utils.AddBuildingStrings(ScaffoldConfig.Id, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
+                    Loc_Initialize_Patch.Translate(typeof(ScaffoldConfig));
+                    Utils.AddBuildingStrings(ScaffoldConfig.Id, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
           // Add scaffold to build menu with the help of utils below
 
           Utils.AddPlan("Base", "storage", ScaffoldConfig.Id, "StorageLocker");
@@ -50,7 +50,7 @@ namespace Scaffolds
         // It also checks to make sure that it's exactly 1kg mass - draggable items (wires, pipes etc) otherwise cause errors since they use a drag tool not build tool
         public static string Postfix(string __result, Recipe ___currentRecipe)
         {
-          if (___currentRecipe.Ingredients[0].amount == 1f)
+          if (___currentRecipe.Ingredients[0].amount == -1f)
           {
             if (BuildTool.Instance.GetComponent<BuildToolHoverTextCard>().currentDef.name == "Scaffold")
             {
@@ -92,7 +92,7 @@ namespace Scaffolds
     // Copied many times, originally from romen
     public static void AddBuildingStrings(string buildingId, string name, string description, string effect)
     {
-      Loc_Initialize_Patch.Translate(typeof(ScaffoldConfig));
+
       Strings.Add($"STRINGS.BUILDINGS.PREFABS.{buildingId.ToUpperInvariant()}.NAME", UI.FormatAsLink(name, buildingId));
       Strings.Add($"STRINGS.BUILDINGS.PREFABS.{buildingId.ToUpperInvariant()}.DESC", description);
       Strings.Add($"STRINGS.BUILDINGS.PREFABS.{buildingId.ToUpperInvariant()}.EFFECT", effect);
