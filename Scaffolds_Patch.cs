@@ -92,6 +92,7 @@ namespace Scaffolds
     // Copied many times, originally from romen
     public static void AddBuildingStrings(string buildingId, string name, string description, string effect)
     {
+      Loc_Initialize_Patch.Translate(typeof(ScaffoldConfig));
       Strings.Add($"STRINGS.BUILDINGS.PREFABS.{buildingId.ToUpperInvariant()}.NAME", UI.FormatAsLink(name, buildingId));
       Strings.Add($"STRINGS.BUILDINGS.PREFABS.{buildingId.ToUpperInvariant()}.DESC", description);
       Strings.Add($"STRINGS.BUILDINGS.PREFABS.{buildingId.ToUpperInvariant()}.EFFECT", effect);
