@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace Scaffolds
 {
+
   public class Scaffolds_Patch : UserMod2
   {
     public static class ScaffoldsPatches
@@ -54,7 +55,7 @@ namespace Scaffolds
           {
             if (BuildTool.Instance.GetComponent<BuildToolHoverTextCard>().currentDef.name == "Scaffold")
             {
-              __result = "Free insta-build!"; // TODO: Internationalization?
+              __result = ScaffoldConfig.Free_insta_build; // TODO: Internationalization?
             }
           }
           return __result;
@@ -84,7 +85,27 @@ namespace Scaffolds
 
         }
       }
-    }
+            [HarmonyPatch(typeof(BuildingDef))]
+            [HarmonyPatch(nameof(BuildingDef.PostProcess))]
+            public static class BuildingDef_PostProcess_Patch
+            {
+                public static bool Prefix(BuildingDef __instance)
+                {
+                    BuildingDef def = __instance;
+                    if (__instance.name != "Scaffold")
+                    { return true; }
+                    else
+                    {
+                        __instance.CraftRecipe = new Recipe(__instance.BuildingComplete.PrefabID().Name, 1f, (SimHashes)0, __instance.Name);
+                        __instance.CraftRecipe.Icon = __instance.UISprite;
+                        Recipe.Ingredient item = new Recipe.Ingredient(__instance.MaterialCategory[0], -1);//set it -1 in the build menu
+                        __instance.CraftRecipe.Ingredients.Add(item);
+                        return false; 
+                    }
+
+                }
+            }
+        }
   }
 
   public static class Utils

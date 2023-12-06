@@ -5,7 +5,10 @@ namespace Scaffolds
 {
   public class ScaffoldConfig : IBuildingConfig
   {
-    public static LocString Id = "Scaffold";
+        public static LocString Free_insta_build = "Free insta-build!";
+
+
+    public const string Id = "Scaffold";
     public static LocString DisplayName = "Scaffold";
     public static LocString Description = "A temporary scaffold that will be built immediately with no materials.";
     public static LocString Effect = "A temporary way to move vertically.";
@@ -28,7 +31,9 @@ namespace Scaffolds
         "scaffold_kanim",
         10,
         1f,
-        new float[1] { -1f }, //building mass is 1kg (of vacuum, imagine that) - less than 1kg causes graphical issues, zero mass causes error
+        new float[1] { 1f }, //1 kg here, set it to -1 kg in the build menu by BuildingDef_PostProcess_Patch
+                             //when using debug or sandbox,this may cause some problems.
+                             //building mass is 1kg (of vacuum, imagine that) - less than 1kg causes graphical issues, zero mass causes error
         MATERIALS.ANY_BUILDABLE,
         9999f,
         BuildLocationRule.NotInTiles,
@@ -49,7 +54,7 @@ namespace Scaffolds
       scaffoldDef.AudioCategory = "Metal";
       scaffoldDef.AudioSize = "small";
       scaffoldDef.DragBuild = true;
-
+            Debug.Log("defend");
       return scaffoldDef;
     }
 
@@ -79,5 +84,6 @@ namespace Scaffolds
     {
     }
   }
+
 }
 

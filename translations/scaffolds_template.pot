@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. Scaffolds.ScaffoldConfig.DeconstructButtonText
+msgctxt "Scaffolds.ScaffoldConfig.DeconstructButtonText"
+msgid "拆除"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.DeconstructButtonTooltip
+msgctxt "Scaffolds.ScaffoldConfig.DeconstructButtonTooltip"
+msgid "立即拆除这个脚手架"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.Description
+msgctxt "Scaffolds.ScaffoldConfig.Description"
+msgid "一个临时脚手架，将立即建造，无需任何材料。"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.DisplayName
+msgctxt "Scaffolds.ScaffoldConfig.DisplayName"
+msgid "脚手架"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.Effect
+msgctxt "Scaffolds.ScaffoldConfig.Effect"
+msgid "一种临时的垂直移动的方式。"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.Free_insta_build
+msgctxt "Scaffolds.ScaffoldConfig.Free_insta_build"
+msgid "立即建造！"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonCancelText
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonCancelText"
+msgid "禁用自动解构"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonCancelTooltip
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonCancelTooltip"
+msgid "阻止此脚手架自动结构自身"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonText
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonText"
+msgid "启用自动解构"
+msgstr ""
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonTooltip
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonTooltip"
+msgid "允许脚手架继续自动解构自身"
+msgstr ""
+
