@@ -2,6 +2,9 @@ msgid ""
 msgstr ""
 "Application: Oxygen Not Included"
 "POT Version: 2.0"
+"This file will change when you load the game."
+"Now is in chinese"
+"Copy the 'translations' folder to the dll folder"
 
 #. Scaffolds.ScaffoldConfig.DeconstructButtonText
 msgctxt "Scaffolds.ScaffoldConfig.DeconstructButtonText"

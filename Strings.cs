@@ -4,25 +4,7 @@ using System.Reflection;
 using HarmonyLib;
 
 namespace Scaffolds
-{/*
-    public class STRINGS
-    {
-        /*public class Scaffolds
-        {
-            public static LocString DisplayName = "Scaffold";
-            public static LocString Description = "A temporary scaffold that will be built immediately with no materials.";
-            public static LocString Effect = "A temporary way to move vertically.";
-
-            public static LocString DeconstructButtonText = "Remove";
-            public static LocString DeconstructButtonTooltip = "Instantly remove this scaffold";
-            public static LocString SelfDestructButtonText = "Enable Self Destruct";
-            public static LocString SelfDestructButtonTooltip = "When enabled, automatically remove scaffold after some time has passed";
-            public static LocString SelfDestructButtonCancelText = "Make Permanent";
-            public static LocString SelfDestructButtonCancelTooltip = "When enabled, this scaffold will remain until manually deconstructed";
-        }*/
-
-    //}
-        // Token: 0x02000005 RID: 5
+{
        // [HarmonyPatch(typeof(Localization), "Initialize")]
         public static class Loc_Initialize_Patch
         {
@@ -38,11 +20,10 @@ namespace Scaffolds
             ScaffoldConfig.SelfDestructButtonText = STRINGS.Scaffolds.SelfDestructButtonText;
             ScaffoldConfig.SelfDestructButtonTooltip = STRINGS.Scaffolds.SelfDestructButtonTooltip; 
             ScaffoldConfig.DeconstructButtonText = STRINGS.Scaffolds.DeconstructButtonText;
-            ScaffoldConfig.DeconstructButtonTooltip = STRINGS.Scaffolds.DeconstructButtonTooltip;*/
+            ScaffoldConfig.DeconstructButtonTooltip = STRINGS.Scaffolds.DeconstructButtonTooltip;
 
-        //}
+        }*///dont need this any more
 
-            // Token: 0x0600000D RID: 13 RVA: 0x00002558 File Offset: 0x00000758
             public static void Translate(Type root)
             {
                 Localization.RegisterForTranslation(root);
