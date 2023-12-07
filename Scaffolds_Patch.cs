@@ -19,8 +19,8 @@ namespace Scaffolds
       {
         public static void Prefix()
         {
-
-          Utils.AddBuildingStrings(ScaffoldConfig.Id, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
+                    Loc_Initialize_Patch.Translate(typeof(ScaffoldConfig));
+                    Utils.AddBuildingStrings(ScaffoldConfig.Id, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
           // Add scaffold to build menu with the help of utils below
 
           Utils.AddPlan("Base", "storage", ScaffoldConfig.Id, "StorageLocker");
@@ -50,11 +50,11 @@ namespace Scaffolds
         // It also checks to make sure that it's exactly 1kg mass - draggable items (wires, pipes etc) otherwise cause errors since they use a drag tool not build tool
         public static string Postfix(string __result, Recipe ___currentRecipe)
         {
-          if (___currentRecipe.Ingredients[0].amount == 1f)
+          if (___currentRecipe.Ingredients[0].amount == -1f)
           {
             if (BuildTool.Instance.GetComponent<BuildToolHoverTextCard>().currentDef.name == "Scaffold")
             {
-              __result = "Free insta-build!"; // TODO: Internationalization?
+              __result = ScaffoldConfig.Free_insta_build; // TODO: Internationalization?
             }
           }
           return __result;
@@ -84,7 +84,27 @@ namespace Scaffolds
 
         }
       }
-    }
+            [HarmonyPatch(typeof(BuildingDef))]
+            [HarmonyPatch(nameof(BuildingDef.PostProcess))]
+            public static class BuildingDef_PostProcess_Patch
+            {
+                public static bool Prefix(BuildingDef __instance)
+                {
+                    BuildingDef def = __instance;
+                    if (__instance.name != "Scaffold")
+                    { return true; }
+                    else
+                    {
+                        __instance.CraftRecipe = new Recipe(__instance.BuildingComplete.PrefabID().Name, 1f, (SimHashes)0, __instance.Name);
+                        __instance.CraftRecipe.Icon = __instance.UISprite;
+                        Recipe.Ingredient item = new Recipe.Ingredient(__instance.MaterialCategory[0], -1);//set it -1 in the build menu
+                        __instance.CraftRecipe.Ingredients.Add(item);
+                        return false; 
+                    }
+
+                }
+            }
+        }
   }
 
   public static class Utils
