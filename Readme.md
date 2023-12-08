@@ -23,7 +23,6 @@ Scaffolds are rickety eyesores, as such, there is a movement penalty when going 
 
 ### Known issues
 
-- If you ever have less than 1 kg of ANY solid material available, then you will not be able to build a scaffold
 - Using the deconstruct tool, you have to choose the All option to deconstruct a scaffold. Since they can be built on top of both buildings and backgrounds, I had to use a layer that doesn't show up in any of the existing deconstruct tool options.
 - Some Buildings have elements that are drawn over the scaffold, which looks strange.
 
@@ -36,4 +35,4 @@ Don't know how to code but still want to contribute? Donations are greatly appre
 
 ### Special Thanks
 
-A big thanks to DoctorFeelGoodMD whose work with MoveThisHere was the basis for the insta-build functionality. Another big thanks to Cairath for the ONI Modding guide that you maintain. And thanks to all those on [the Discord channels](https://discord.gg/oxygennotincluded) who have been patient with my questions.
+A big thanks to DoctorFeelGoodMD whose work with MoveThisHere was the basis for the insta-build functionality. Another big thanks to Cairath for the ONI Modding guide that you maintain. Qikahome deserves recognition for providing partial Chinese translations and a fix for an early issue. And thanks to all those on [the Discord channels](https://discord.gg/oxygennotincluded) who have been patient with my questions.
