@@ -31,7 +31,6 @@ namespace Scaffolds
         10,
         1f,
         new float[1] { 1f }, //building mass is 1kg (of vacuum, imagine that) - less than 1kg causes graphical issues, zero mass causes error
-                             //it gets set to -1 in the build menu to work around new colonies not even having 1kg of mass available yet
         MATERIALS.ANY_BUILDABLE,
         9999f,
         BuildLocationRule.NotInTiles,
