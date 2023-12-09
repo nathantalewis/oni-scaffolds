@@ -22,7 +22,7 @@ namespace Scaffolds
           Loc_Initialize_Patch.Translate(typeof(ScaffoldConfig));
           Utils.AddBuildingStrings(ScaffoldConfig.Id, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
 
-          Utils.AddPlan("Base", "storage", ScaffoldConfig.Id, "StorageLocker");
+          Utils.AddPlan("Base", "ladders", ScaffoldConfig.Id, "Ladder");
         }
       }
 
