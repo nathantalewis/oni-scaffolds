@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#. Scaffolds.ScaffoldConfig.DeconstructButtonText
+msgctxt "Scaffolds.ScaffoldConfig.DeconstructButtonText"
+msgid "Remove"
+msgstr "Détruire"
+
+#. Scaffolds.ScaffoldConfig.DeconstructButtonTooltip
+msgctxt "Scaffolds.ScaffoldConfig.DeconstructButtonTooltip"
+msgid "Instantly remove this scaffold"
+msgstr "Détruire instantanément cet échafaudage"
+
+#. Scaffolds.ScaffoldConfig.Description
+msgctxt "Scaffolds.ScaffoldConfig.Description"
+msgid "A temporary scaffold that will be built immediately with no materials."
+msgstr "Un échafaudage temporaire qui sera construit immédiatement sans matériaux."
+
+#. Scaffolds.ScaffoldConfig.DisplayName
+msgctxt "Scaffolds.ScaffoldConfig.DisplayName"
+msgid "Scaffold"
+msgstr "Échafaudage"
+
+#. Scaffolds.ScaffoldConfig.Effect
+msgctxt "Scaffolds.ScaffoldConfig.Effect"
+msgid "A temporary way to move vertically."
+msgstr "Un moyen temporaire de se déplacer verticalement."
+
+#. Scaffolds.ScaffoldConfig.Free_insta_build
+msgctxt "Scaffolds.ScaffoldConfig.Free_insta_build"
+msgid "Free insta-build!"
+msgstr "Build instantané gratuit !"
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonCancelText
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonCancelText"
+msgid "Make Permanent"
+msgstr "Rendre permanent"
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonCancelTooltip
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonCancelTooltip"
+msgid "When enabled, this scaffold will remain until manually deconstructed"
+msgstr "Lorsqu'il est activé, cet échafaudage restera en place jusqu'à ce qu'il soit déconstruit manuellement"
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonText
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonText"
+msgid "Enable Self Destruct"
+msgstr "Activer l'autodestruction"
+
+#. Scaffolds.ScaffoldConfig.SelfDestructButtonTooltip
+msgctxt "Scaffolds.ScaffoldConfig.SelfDestructButtonTooltip"
+msgid "When enabled, automatically remove scaffold after some time has passed"
+msgstr "Lorsque cette option est activée, l'échafaudage est automatiquement retiré au bout d'un certain temps"
