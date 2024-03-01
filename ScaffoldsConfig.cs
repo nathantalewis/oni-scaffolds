@@ -72,7 +72,7 @@ namespace Scaffolds
 
       go.AddOrGet<CopyBuildingSettings>();
 
-      Object.Destroy(go.AddOrGet<Deconstructable>()); // Remove vanilla deconstructable just to be safe, it's made of vacuum so deconstruct = crash
+      Object.Destroy(go.AddOrGet<Reconstructable>()); //remove vanilla reconstructable, can't make out of anything but vacuum (bc made with no resources)
       go.AddOrGet<DeconstructableScaffold>();
 
     }
