@@ -72,7 +72,17 @@ namespace Scaffolds
 
       go.AddOrGet<CopyBuildingSettings>();
 
-      Object.Destroy(go.AddOrGet<Reconstructable>()); //remove vanilla reconstructable, can't make out of anything but vacuum (bc made with no resources)
+      Deconstructable deconstructable = go.GetComponent<Deconstructable>();
+      if (deconstructable != null)
+      {
+        Reconstructable reconstructable = go.GetComponent<Reconstructable>();
+        if (reconstructable != null)
+        {
+          Object.Destroy(reconstructable); // remove vanilla reconstructable, no way to change materials here
+        }
+        Object.Destroy(deconstructable); // remove vanilla deconstructable, we'll be replacing it with our own below 
+      }
+
       go.AddOrGet<DeconstructableScaffold>();
 
     }
