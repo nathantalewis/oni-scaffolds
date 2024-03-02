@@ -77,7 +77,7 @@ namespace Scaffolds
           else
           {
             selected_elements[0] = TagManager.Create("Vacuum"); //sets to vacuum element to prevent heat exchange... this must be dealt with at deconstruct or it will cause a crash
-            __instance.Build(Grid.PosToCell(pos), orientation, null, selected_elements, 293.15f, playsound: false, GameClock.Instance.GetTime());
+            __instance.Build(Grid.PosToCell(pos), orientation, null, selected_elements, 293.15f, playsound: true, GameClock.Instance.GetTime());
             return false; // Any better ideas for ways to accomplish this instant build?
           }
 
