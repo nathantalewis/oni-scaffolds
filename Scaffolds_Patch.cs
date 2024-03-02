@@ -20,9 +20,9 @@ namespace Scaffolds
           // Add scaffold to build menu with the help of utils below
 
           Loc_Initialize_Patch.Translate(typeof(ScaffoldConfig));
-          Utils.AddBuildingStrings(ScaffoldConfig.Id, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
+          Utils.AddBuildingStrings(ScaffoldConfig.ID, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
 
-          Utils.AddPlan("Base", "ladders", ScaffoldConfig.Id, "Ladder");
+          Utils.AddPlan("Base", "ladders", ScaffoldConfig.ID, "Ladder");
         }
       }
 

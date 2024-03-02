@@ -7,7 +7,7 @@ namespace Scaffolds
   {
     public static LocString Free_insta_build = "Free insta-build!";
 
-    public const string Id = "Scaffold";
+    public const string ID = "Scaffold";
     public static LocString DisplayName = "Scaffold";
     public static LocString Description = "A temporary scaffold that will be built immediately with no materials.";
     public static LocString Effect = "A temporary way to move vertically.";
@@ -20,12 +20,12 @@ namespace Scaffolds
     public static LocString SelfDestructButtonCancelTooltip = "When enabled, this scaffold will remain until manually deconstructed";
     public static float TimeToLive = 10 * 600f;
 
-    public static ObjectLayer objectLayer = ObjectLayer.FillPlacer; // This layer doesn't seem to be used anywhere else... hopefully
+    public static ObjectLayer ObjectLayer = ObjectLayer.FillPlacer; // This layer doesn't seem to be used anywhere else... hopefully
 
     public override BuildingDef CreateBuildingDef()
     {
       BuildingDef scaffoldDef = BuildingTemplates.CreateBuildingDef(
-        Id,
+        ID,
         1, 1,
         "scaffold_kanim",
         10,
@@ -40,7 +40,7 @@ namespace Scaffolds
 
       BuildingTemplates.CreateLadderDef(scaffoldDef);
       scaffoldDef.ContinuouslyCheckFoundation = false; // Needed  since we are using "NotInTiles"
-      scaffoldDef.ObjectLayer = objectLayer;
+      scaffoldDef.ObjectLayer = ObjectLayer;
       scaffoldDef.Repairable = false;
       scaffoldDef.Disinfectable = false;
       scaffoldDef.Invincible = true; // nothing but the player can destroy the mighty Scaffold
@@ -64,7 +64,7 @@ namespace Scaffolds
 
       // Custom
 
-      animTileable.objectLayer = objectLayer;
+      animTileable.objectLayer = ObjectLayer;
 
       // TODO: Make this configurable
       scaffold.upwardsMovementSpeedMultiplier = 0.75f; // Scaffolds are rickety, we have to move more slowly on them
