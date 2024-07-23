@@ -24,7 +24,7 @@ Scaffolds are rickety eyesores, as such, there is a movement penalty when going 
 ### Known issues
 
 - If you ever have less than 1 kg of ANY buildable material available, then you will not be able to build a scaffold
-- Using the deconstruct tool, you have to choose the All option to deconstruct a scaffold. Since they can be built on top of both buildings and backgrounds, I had to use a layer that doesn't show up in any of the existing deconstruct tool options.
+- There is no sound when the Scaffold is built
 - Some Buildings have elements that are drawn over the scaffold, which looks strange.
 
 ### Contributing and Issue Reporting

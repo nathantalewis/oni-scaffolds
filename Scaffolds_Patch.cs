@@ -83,6 +83,25 @@ namespace Scaffolds
 
         }
       }
+
+      [HarmonyPatch(typeof(FilteredDragTool))]
+      [HarmonyPatch(nameof(FilteredDragTool.GetFilterLayerFromObjectLayer))]
+      public static class FilteredDragTool_GetFilterLayerFromObjectLayer_Patch
+      {
+        public static void Postfix(ObjectLayer gamer_layer, ref string __result)
+        {
+#if DEBUG
+          Debug.Log($"Postfixing FilteredDragTool.GetFilterLayerFromObjectLayer with {gamer_layer} and {__result}");
+#endif
+          if (gamer_layer == ScaffoldConfig.ObjectLayer)
+          {
+#if DEBUG
+            Debug.Log($"Overriding FilteredDragTool.GetFilterLayerFromObjectLayer with {ToolParameterMenu.FILTERLAYERS.BUILDINGS}");
+#endif
+            __result = ToolParameterMenu.FILTERLAYERS.BUILDINGS;
+          }
+        }
+      }
     }
   }
 
@@ -99,7 +118,9 @@ namespace Scaffolds
     //thanks psyko for new building adding methods
     public static void AddPlan(HashedString category, string subcategory, string idBuilding, string addAfter = null)
     {
+#if DEBUG
       Debug.Log("Adding " + idBuilding + " to category " + category);
+#endif
       foreach (PlanScreen.PlanInfo menu in TUNING.BUILDINGS.PLANORDER)
       {
         if (menu.category == category)
@@ -109,7 +130,9 @@ namespace Scaffolds
         }
       }
 
+#if DEBUG
       Debug.Log($"Unknown build menu category: ${category}");
+#endif
     }
 
     private static void AddPlanToCategory(PlanScreen.PlanInfo menu, string subcategory, string idBuilding, string addAfter = null)
