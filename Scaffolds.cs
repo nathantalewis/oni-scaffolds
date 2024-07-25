@@ -11,7 +11,7 @@ namespace Scaffolds
   public class Scaffold : Ladder
   {
     [Serialize]
-    private bool willSelfDestruct = true;
+    private bool willSelfDestruct = !Scaffolds_Patch.Settings.PermanentByDefault;
 
     [Serialize]
     private float deconstructMoment = -1f;
@@ -21,6 +21,10 @@ namespace Scaffolds
     protected override void OnPrefabInit()
     {
       base.OnPrefabInit();
+
+#if DEBUG
+      Debug.Log("[Scaffolds] Scaffold OnPrefabInit");
+#endif
 
       Subscribe(-905833192, OnCopySettingsDelegate);
       Subscribe(493375141, OnRefreshUserMenuDelegate);
@@ -40,10 +44,16 @@ namespace Scaffolds
     {
       base.OnSpawn();
 
+#if DEBUG
+      Debug.Log("[Scaffolds] Scaffold OnSpawn");
+#endif
       if (willSelfDestruct)
       {
         float now = GameClock.Instance.GetTime();
-        float timeRemaining = deconstructMoment == -1 ? ScaffoldConfig.TimeToLive : deconstructMoment - now;
+        float timeRemaining = deconstructMoment == -1 ? Scaffolds_Patch.Settings.Duration * 600.0f : deconstructMoment - now;
+#if DEBUG
+        Debug.Log($"[Scaffolds] Scheduling deconstruct in {timeRemaining} seconds");
+#endif
         this.scheduleDeconstruct(timeRemaining);
       }
     }
@@ -52,21 +62,33 @@ namespace Scaffolds
     {
       if (deconstructHandle.IsValid)
       {
+#if DEBUG
+        Debug.Log("[Scaffolds] Clearing previous deconstruct schedule");
+#endif
         deconstructHandle.ClearScheduler();
       }
       deconstructHandle = GameScheduler.Instance.Schedule(nameof(Scaffold), timeRemaining, new Action<object>(Scaffold.Deconstruct), (object)this);
 
       deconstructMoment = GameClock.Instance.GetTime() + timeRemaining;
+#if DEBUG
+      Debug.Log($"[Scaffolds] Scheduled deconstruct for {deconstructMoment}");
+#endif
     }
 
     private void unscheduleDeconstruct()
     {
       if (deconstructHandle.IsValid)
       {
+#if DEBUG
+        Debug.Log("[Scaffolds] Clearing deconstruct schedule");
+#endif
         deconstructHandle.ClearScheduler();
       }
 
       deconstructMoment = -1f;
+#if DEBUG
+      Debug.Log("[Scaffolds] Unscheduled deconstruct");
+#endif
     }
 
     private static void Deconstruct(object data)
@@ -74,11 +96,14 @@ namespace Scaffolds
       Scaffold scaffold = data as Scaffold;
       if (scaffold != null)
       {
+#if DEBUG
+        Debug.Log("[Scaffolds] Timer-triggered Scaffold Deconstruct");
+#endif
         scaffold.GetComponent<DeconstructableScaffold>().OnDeconstruct();
       }
       else
       {
-        Debug.LogError("Scaffolds attempted to automatically deconstruct something that wasn't a Scaffold or was null. Please report this error.");
+        Debug.LogError("[Scaffolds] Scaffolds attempted to automatically deconstruct something that wasn't a Scaffold or was null. Please report this error.");
       }
     }
 
@@ -86,8 +111,11 @@ namespace Scaffolds
     {
       if (!willSelfDestruct)
       {
-        this.scheduleDeconstruct(ScaffoldConfig.TimeToLive);
+        this.scheduleDeconstruct(Scaffolds_Patch.Settings.Duration * 600.0f);
         willSelfDestruct = true;
+#if DEBUG
+        Debug.Log("[Scaffolds] Enabled self destruct");
+#endif
       }
     }
 
@@ -97,6 +125,9 @@ namespace Scaffolds
       {
         this.unscheduleDeconstruct();
         willSelfDestruct = false;
+#if DEBUG
+        Debug.Log("[Scaffolds] Disabled self destruct");
+#endif
       }
     }
 
@@ -104,6 +135,9 @@ namespace Scaffolds
     {
       this.deconstructHandle.ClearScheduler();
       base.OnCleanUp();
+#if DEBUG
+      Debug.Log("[Scaffolds] Scaffold finished OnCleanUp");
+#endif
     }
 
 
@@ -118,10 +152,16 @@ namespace Scaffolds
           //this is copying settings TO the local variables from clipboard component
           if (component.willSelfDestruct)
           {
+#if DEBUG
+            Debug.Log("[Scaffolds] Enabling self destruct from a setting paste.");
+#endif
             EnableSelfDestruct();
           }
           else
           {
+#if DEBUG
+            Debug.Log("[Scaffolds] Disabling self destruct from a setting paste.");
+#endif
             DisableSelfDestruct();
           }
         }
@@ -132,6 +172,9 @@ namespace Scaffolds
     {
       KIconButtonMenu.ButtonInfo button = willSelfDestruct ? new KIconButtonMenu.ButtonInfo("action_switch_toggle", ScaffoldConfig.SelfDestructButtonCancelText, DisableSelfDestruct, Action.NumActions, null, null, null, ScaffoldConfig.SelfDestructButtonCancelTooltip) : new KIconButtonMenu.ButtonInfo("action_switch_toggle", ScaffoldConfig.SelfDestructButtonText, EnableSelfDestruct, Action.NumActions, null, null, null, ScaffoldConfig.SelfDestructButtonTooltip);
       Game.Instance.userMenu.AddButton(base.gameObject, button);
+#if DEBUG
+      Debug.Log($"[Scaffolds] Scaffold user menu refreshed, new button based on willSelfDestruct: {willSelfDestruct}");
+#endif
     }
   }
 
@@ -158,7 +201,7 @@ namespace Scaffolds
           return component.Def.PlacementOffsets;
         }
 
-        Debug.LogError("There's an error with the Scaffolds mod deconstructing. Please report this error.");
+        Debug.LogError("[Scaffolds] There's an error with the Scaffolds mod deconstructing. Please report this error.");
         return null;
       }
     }
@@ -185,13 +228,6 @@ namespace Scaffolds
 
     public void OnDeconstruct()
     {
-      Scaffold scaffold = base.GetComponent<Scaffold>();
-
-      if (scaffold.deconstructHandle.IsValid)
-      {
-        scaffold.deconstructHandle.ClearScheduler();
-      }
-
       base.gameObject.DeleteObject(); // Goodbye
     }
 
@@ -200,6 +236,9 @@ namespace Scaffolds
       // Add deconstruct button
       KIconButtonMenu.ButtonInfo button = new KIconButtonMenu.ButtonInfo("action_deconstruct", ScaffoldConfig.DeconstructButtonText, OnDeconstruct, Action.NumActions, null, null, null, ScaffoldConfig.DeconstructButtonTooltip);
       Game.Instance.userMenu.AddButton(base.gameObject, button, 0f);
+#if DEBUG
+      Debug.Log("[Scaffolds] Deconstruct button added to user menu during OnRefreshUserMenu.");
+#endif
     }
   }
 }

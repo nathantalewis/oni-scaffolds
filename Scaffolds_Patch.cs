@@ -4,11 +4,30 @@ using HarmonyLib;
 using STRINGS;
 using KMod;
 using UnityEngine;
+using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 
 namespace Scaffolds
 {
-  public class Scaffolds_Patch : UserMod2
+  public sealed class Scaffolds_Patch : UserMod2
   {
+    public static ScaffoldsSettings Settings { get; private set; }
+
+    public override void OnLoad(Harmony harmony)
+    {
+      base.OnLoad(harmony);
+      PUtil.InitLibrary(false);
+      POptions pOptions = new POptions();
+      pOptions.RegisterOptions(this, typeof(ScaffoldsSettings));
+#if DEBUG
+      Debug.Log("[Scaffolds] Reading settings");
+#endif
+      Settings = POptions.ReadSettings<ScaffoldsSettings>() ?? new ScaffoldsSettings();
+#if DEBUG
+      Debug.Log("[Scaffolds] Loaded");
+#endif
+    }
+
     public static class ScaffoldsPatches
     {
       [HarmonyPatch(typeof(GeneratedBuildings))]
@@ -19,7 +38,14 @@ namespace Scaffolds
         {
           // Add scaffold to build menu with the help of utils below
 
+#if DEBUG
+          Debug.Log("[Scaffolds] Translating");
+#endif
           Loc_Initialize_Patch.Translate(typeof(ScaffoldConfig));
+
+#if DEBUG
+          Debug.Log("[Scaffolds] Adding Scaffold to build menu");
+#endif
           Utils.AddBuildingStrings(ScaffoldConfig.ID, ScaffoldConfig.DisplayName, ScaffoldConfig.Description, ScaffoldConfig.Effect);
 
           Utils.AddPlan("Base", "ladders", ScaffoldConfig.ID, "Ladder");
@@ -34,6 +60,9 @@ namespace Scaffolds
         {
           if (def.name == "Scaffold")
           {
+#if DEBUG
+            Debug.Log("[Scaffolds] Removing material selector from Scaffold build menu info screen");
+#endif
             __instance.materialSelectionPanel.gameObject.SetActive(false); //remove material selector since no materials
 
           }
@@ -53,6 +82,9 @@ namespace Scaffolds
           {
             if (BuildTool.Instance.GetComponent<BuildToolHoverTextCard>().currentDef.name == "Scaffold")
             {
+#if DEBUG
+              Debug.Log("[Scaffolds] Overwriting hover text card to show it is a free insta-build");
+#endif
               __result = ScaffoldConfig.Free_insta_build;
             }
           }
@@ -76,6 +108,9 @@ namespace Scaffolds
           { return true; }
           else
           {
+#if DEBUG
+            Debug.Log($"[Scaffolds] Building Scaffold at {pos} -> {Grid.PosToCell(pos)}");
+#endif
             selected_elements[0] = TagManager.Create("Vacuum"); //sets to vacuum element to prevent heat exchange... this must be dealt with at deconstruct or it will cause a crash
             __instance.Build(Grid.PosToCell(pos), orientation, null, selected_elements, 293.15f, playsound: true, GameClock.Instance.GetTime());
             return false; // Any better ideas for ways to accomplish this instant build?
@@ -91,12 +126,12 @@ namespace Scaffolds
         public static void Postfix(ObjectLayer gamer_layer, ref string __result)
         {
 #if DEBUG
-          Debug.Log($"Postfixing FilteredDragTool.GetFilterLayerFromObjectLayer with {gamer_layer} and {__result}");
+          Debug.Log($"[Scaffolds] Postfixing FilteredDragTool.GetFilterLayerFromObjectLayer with {gamer_layer} and {__result}");
 #endif
           if (gamer_layer == ScaffoldConfig.ObjectLayer)
           {
 #if DEBUG
-            Debug.Log($"Overriding FilteredDragTool.GetFilterLayerFromObjectLayer with {ToolParameterMenu.FILTERLAYERS.BUILDINGS}");
+            Debug.Log($"[Scaffolds] Overriding FilteredDragTool.GetFilterLayerFromObjectLayer with {ToolParameterMenu.FILTERLAYERS.BUILDINGS}");
 #endif
             __result = ToolParameterMenu.FILTERLAYERS.BUILDINGS;
           }
@@ -105,6 +140,7 @@ namespace Scaffolds
     }
   }
 
+  // TODO: Switch to using PLib for these build menu utilities
   public static class Utils
   {
     // Copied many times, originally from romen
@@ -119,7 +155,7 @@ namespace Scaffolds
     public static void AddPlan(HashedString category, string subcategory, string idBuilding, string addAfter = null)
     {
 #if DEBUG
-      Debug.Log("Adding " + idBuilding + " to category " + category);
+      Debug.Log("[Scaffolds] Adding " + idBuilding + " to category " + category);
 #endif
       foreach (PlanScreen.PlanInfo menu in TUNING.BUILDINGS.PLANORDER)
       {
@@ -131,7 +167,7 @@ namespace Scaffolds
       }
 
 #if DEBUG
-      Debug.Log($"Unknown build menu category: ${category}");
+      Debug.Log($"[Scaffolds] Unknown build menu category: ${category}");
 #endif
     }
 
@@ -149,7 +185,7 @@ namespace Scaffolds
           int index = data.IndexOf(new KeyValuePair<string, string>(addAfter, subcategory));
           if (index == -1)
           {
-            Debug.Log($"Could not find building {subcategory}/{addAfter} to add {idBuilding} after. Adding at the end !");
+            Debug.Log($"[Scaffolds] Could not find building {subcategory}/{addAfter} to add {idBuilding} after. Adding at the end !");
             data.Add(new KeyValuePair<string, string>(idBuilding, subcategory));
             return;
           }
