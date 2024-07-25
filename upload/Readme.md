@@ -8,23 +8,30 @@ Scaffolds are rickety eyesores, as such, there is a movement penalty when going 
 
 **_Caution!_** Because these Scaffolds automatically deconstruct themselves after 10 cycles by default, if a dupe relies on a Scaffold to get somewhere they are likely to end up trapped when the Scaffold disappears. There is a toggle on each Scaffold that can be used to disable the automatic deconstruction for that Scaffold if you want a Scaffold to stay around forever. That setting can then be copied to other Scaffolds.
 
+### Mod Options
+
+You can configure the Scaffolds Mod to best suit your play style. From the main screen, choose Mods and then press the Options button on the Scaffolds mod.
+
+- Permanent by Default: If you set this to true, then all new scaffolds you place will default to being permanent scaffolds. Once a scaffold is built, you can still toggle it to self-destruct with the button in the info card.
+- Duration: The number of cycles that non-permanent scaffolds live before they self-destruct.
+- Decor Penalty Value: How ugly Scaffolds will be. Higher values mean more of a penalty. For reference, normal Ladders have a decor penalty of 5.
+- Decor Penalty Radius: How many tiles away the decor penalty will be applied. For reference, normal Ladders have a radius of 1.
+- Upwards Speed Penalty: How much slower dupes moving upwards on Scaffolds will be. This is a percent between 0 and 99, with 0 being no penalty and 99 preventing almost all movement.
+- Downwards Speed Penalty: How much slower dupes moving downwards on Scaffolds will be. This is a percent between 0 and 99, with 0 being no penalty and 99 preventing almost all movement.
+
 ### Ideas for improvements
 
-- Make the timer value configurable globally as a mod setting
 - Allow the timer amount for each scaffold to be set individually
 - Make the timer reset any time a dupe or bot uses the scaffold
-- Make it possible to replace a scaffold with a ladder or plastic ladder
-- Change the deconstruct tool options to have a checkbox for Scaffolds
+- Make it possible to replace a scaffold with a ladder or plastic ladder without it showing as red when trying to place them
 - Use Attachment points (like the Ladder Bed does) to make sure scaffolds can only be used if connected to a floor
   - This is more of an aesthetic idea, since a scaffold's wheels hanging in the middle of the air is kind of awkward
-- Make the decor penalty for the Scaffold configurable
-- Make the travel speed for the Scaffold configurable
 - Require some level of research to unlock Scaffolds?
 
 ### Known issues
 
 - If you ever have less than 1 kg of ANY buildable material available, then you will not be able to build a scaffold
-- There is no sound when the Scaffold is built
+- Sometimes the sound when a Scaffold is built becomes very distant and almost can't be heard
 - Some Buildings have elements that are drawn over the scaffold, which looks strange.
 
 ### Contributing and Issue Reporting
